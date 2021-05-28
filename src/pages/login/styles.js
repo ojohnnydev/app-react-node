@@ -56,7 +56,7 @@ export const Form = styled.form`
     border-bottom: 1px solid #cdcdcd;
     width: 100%;
   }
-  /*#btnLogin {
+  /*#btnCadastro {
     font-size: 15px;
     font-weight: bold;
     background-color: #0073B1;
@@ -64,6 +64,7 @@ export const Form = styled.form`
     text-decoration: none;
     text-transform: uppercase;
   }*/
+
   a {
     border: 1px solid #0073B1;
     width: 110%;
