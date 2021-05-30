@@ -16,7 +16,7 @@ exports.create = (req, res) => {
         senha: req.body.password
     });
 
-    // Salva laboratório criado no banco
+    // Salva usuário criado no banco
     Usuarios.create(usuario, (err, data) => {
         if (err)
             res.status(500).send({
@@ -29,7 +29,7 @@ exports.create = (req, res) => {
 
 // Busca usuário pelos dados de login
 exports.login = (req, res) => {
-    Usuarios.realizalogin(req.body.userName, req.body.userPassword, (err, data) => {
+    Usuarios.realizalogin(req.params.userName, req.params.userPassword, (err, data) => {
         if (err) {
             if (err.kind === "Usuário não encontrado!") {
                 res.status(404).send({
@@ -40,6 +40,10 @@ exports.login = (req, res) => {
                     message: "Erro ao buscar usuário com o login " + req.params.userName
                 });
             }
+        } else if (data.message) {
+            res.status(404).send({
+                message: data.message
+            });
         } else res.send(data);
     });
 };

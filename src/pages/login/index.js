@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter  } from 'react-router-dom';
 import api from '../../services/api';
-import { login } from "../../services/auth";
+/*import { login } from "../../services/auth";*/
 
 import Logo from '../../assets/user.svg';
 import { Form, Container } from './styles';
@@ -29,12 +29,12 @@ class Login extends Component {
             })
         } else {
             try {
-                const response = await api.post("/usuarioLogin", { nome, senha });
-                console.log(response);
-                login(response.data.token);
+                // const response = await api.get(`/usuarios/${nome}/${senha}`);
+                await api.get(`/usuarios/${nome}/${senha}`);
+                // login(response.data.token);
                 this.props.history.push("/inicio");
             } catch (err) {
-                console.log(err);
+
                 Swal.fire({
                     title: 'Erro!',
                     text: 'Ocorreu um erro ao realizar o login!',

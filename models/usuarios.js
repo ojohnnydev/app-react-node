@@ -22,14 +22,17 @@ Usuarios.create = (newUser, result) => {
 
 Usuarios.realizalogin = (userName, userPassword, result) => {
     sql.query('SELECT * FROM usuarios WHERE nome = ? AND senha = ?', [userName, userPassword] , (err, res) => {
+
         if (err) {
             console.log("Erro: ", err);
             result(err, null);
-            return;
+        } else if (res.length === 0) {
+            console.log("Usuário não cadastrado!");
+            result(null, { message : "Usuário não cadastrado!" });
+        } else {
+            console.log("Usuário logado: ", res);
+            result(null, res);
         }
-
-        console.log("Usuário logado: ", res);
-        result(null, res);
     });
 };
 
