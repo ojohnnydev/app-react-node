@@ -3,23 +3,23 @@ import { Link, withRouter  } from 'react-router-dom';
 import api from '../../services/api';
 
 import Logo from '../../assets/login.svg';
-import { Form, Container } from './styles';
+import { Form } from './styles';
 import Swal from 'sweetalert2';
+import { Container, Row, Col } from 'react-bootstrap';
 
 class Cadastrar extends Component {
     state = {
-        username: '',
+        nome: '',
         email: '',
-        password: '',
-        error: ''
+        senha: ''
     }
 
     handleCadastro = async  e => {
         e.preventDefault();
 
-        const { username, email, password } = this.state;
+        const { nome, email, senha } = this.state;
 
-        if (!username || !email || !password) {
+        if (!nome || !email || !senha) {
             Swal.fire({
                 title: 'Atenção!',
                 text: 'Preencha os campos para se cadastrar!',
@@ -29,8 +29,8 @@ class Cadastrar extends Component {
             })
         } else {
             try {
-                await api.post("/usuarios", { username, email, password });
-                this.props.history.push("/");
+                await api.post("/usuarios", { nome, email, senha });
+                this.props.history.push("/login");
             } catch (err) {
                 console.log(err);
                 Swal.fire({
@@ -39,40 +39,64 @@ class Cadastrar extends Component {
                     icon: 'error',
                     confirmButtonText: 'Ok',
                     confirmButtonColor: '#F05F70'
-                })
+                });
             }
         }
     }
 
     render() {
         return (
-            <Container>
-                <Form onSubmit={this.handleCadastro} autoComplete="off">
-                    <img src={Logo} alt="Login logo" />
+            <Container fluid={"md"} style={{ padding: 0 }}>
 
-                    {this.state.error && <p>{this.state.error}</p>}
-                    <input
-                        type="text"
-                        placeholder="Nome de usuário"
-                        onChange={e => this.setState({ username: e.target.value })}
-                    />
-                    <input
-                        type="email"
-                        placeholder="Endereço de e-mail"
-                        onChange={e => this.setState({ email: e.target.value })}
-                    />
-                    <input
-                        type="password"
-                        placeholder="Senha"
-                        onChange={e => this.setState({ password: e.target.value })}
-                    />
-                    <button type="submit">Cadastrar</button>
+                <Row style={{ backgroundColor: '#1770C3', height: '53px'}}>
+                    <Col style={{padding: 12}}>
+                        <span style={{ color: '#FFFFFF', fontSize: '25px', fontFamily: 'Arial' }}>
+                            <Link
+                                style={{ color: '#FFFFFF', textDecoration: 'none' }}
+                                to="/">DevStore</Link>
+                        </span>
+                        <span
+                            style={{ color: '#FFFFFF', fontSize: '15px', fontFamily: 'Arial', float: 'right', marginTop: '5px', marginLeft: '15px', marginRight: '15px' }}>
+                            <Link
+                                style={{ color: '#FFFFFF', textDecoration: 'none' }}
+                                to="/login">Login</Link>
+                        </span>
+                        <span
+                            style={{ color: '#FFFFFF', fontSize: '15px', fontFamily: 'Arial', float: 'right', marginTop: '5px' }}>
+                            <Link
+                                style={{ color: '#FFFFFF', textDecoration: 'none' }}
+                                to="/cadastrar">Cadastrar</Link>
+                        </span>
+                    </Col>
+                </Row>
 
-                    <hr/>
+                <Row>
+                    <Form onSubmit={this.handleCadastro} autoComplete="off">
 
-                    {/*<button type="button" id="btnLogin" >Fazer login</button>*/}
-                    <Link to="/login">Fazer login</Link>
-                </Form>
+                        <img src={Logo} alt="Login logo" />
+
+                        <input
+                            type="text"
+                            placeholder="Nome de usuário"
+                            onChange={e => this.setState({ nome: e.target.value })}
+                        />
+                        <input
+                            type="email"
+                            placeholder="Endereço de e-mail"
+                            onChange={e => this.setState({ email: e.target.value })}
+                        />
+                        <input
+                            type="password"
+                            placeholder="Senha"
+                            onChange={e => this.setState({ senha: e.target.value })}
+                        />
+                        <button type="submit">Cadastrar</button>
+
+                        <hr/>
+
+                        <Link to="/login">Fazer login</Link>
+                    </Form>
+                </Row>
             </Container>
         );
     }

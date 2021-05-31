@@ -11,9 +11,9 @@ exports.create = (req, res) => {
 
     // Cria um novo usuário
     const usuario = new Usuarios({
-        nome: req.body.username,
+        nome: req.body.nome,
         email: req.body.email,
-        senha: req.body.password
+        senha: req.body.senha
     });
 
     // Salva usuário criado no banco
@@ -40,10 +40,8 @@ exports.login = (req, res) => {
                     message: "Erro ao buscar usuário com o login " + req.params.userName
                 });
             }
-        } else if (data.message) {
-            res.status(404).send({
-                message: data.message
-            });
-        } else res.send(data);
+        }
+
+        else res.send(data);
     });
 };

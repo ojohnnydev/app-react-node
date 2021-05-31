@@ -4,7 +4,7 @@ const sql = require("./db");
 const Usuarios = function (Usuario) {
     this.nome = Usuario.nome;
     this.email = Usuario.email;
-    this.senha = Usuario.senha;
+    this.senha = new Buffer(Usuario.senha).toString('base64'); // Faz criptografia da senha
 }
 
 Usuarios.create = (newUser, result) => {
@@ -21,18 +21,19 @@ Usuarios.create = (newUser, result) => {
 };
 
 Usuarios.realizalogin = (userName, userPassword, result) => {
-    sql.query('SELECT * FROM usuarios WHERE nome = ? AND senha = ?', [userName, userPassword] , (err, res) => {
+
+    var senha = new Buffer(userPassword).toString('base64'); // Faz criptografia da senha para validação no select
+
+    sql.query('SELECT * FROM usuarios WHERE nome = ? AND senha = ?', [userName, senha] , (err, res) => {
 
         if (err) {
             console.log("Erro: ", err);
             result(err, null);
-        } else if (res.length === 0) {
-            console.log("Usuário não cadastrado!");
-            result(null, { message : "Usuário não cadastrado!" });
-        } else {
-            console.log("Usuário logado: ", res);
-            result(null, res);
+            return;
         }
+
+        console.log("Usuário logado: ", res);
+        result(null, res);
     });
 };
 
