@@ -29,6 +29,8 @@ app.get("/", (req, res) => {
 });
 
 require("./routes/usuarios.routes")(app);
+require("./routes/computadores.routes")(app);
+require("./routes/celulares.routes")(app);
 
 // set port, listen for requests
 app.listen(3001, '127.0.0.1',() => {

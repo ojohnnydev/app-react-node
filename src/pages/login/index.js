@@ -8,6 +8,8 @@ import { Form } from './styles';
 import Swal from 'sweetalert2';
 import { Container, Row, Col } from 'react-bootstrap';
 
+import Menu from '../../componentes/menu/index';
+
 class Login extends Component {
     state = {
         nome: '',
@@ -85,27 +87,7 @@ class Login extends Component {
 
             <Container fluid={"md"} style={{ padding: 0 }}>
 
-                <Row style={{ backgroundColor: '#1770C3', height: '53px'}}>
-                    <Col style={{padding: 12}}>
-                        <span style={{ color: '#FFFFFF', fontSize: '25px', fontFamily: 'Arial' }}>
-                            <Link
-                                style={{ color: '#FFFFFF', textDecoration: 'none' }}
-                                to="/">DevStore</Link>
-                        </span>
-                        <span
-                            style={{ color: '#FFFFFF', fontSize: '15px', fontFamily: 'Arial', float: 'right', marginTop: '5px', marginLeft: '15px', marginRight: '15px' }}>
-                            <Link
-                                style={{ color: '#FFFFFF', textDecoration: 'none' }}
-                                to="/login">Login</Link>
-                        </span>
-                        <span
-                            style={{ color: '#FFFFFF', fontSize: '15px', fontFamily: 'Arial', float: 'right', marginTop: '5px' }}>
-                            <Link
-                                style={{ color: '#FFFFFF', textDecoration: 'none' }}
-                                to="/cadastrar">Cadastrar</Link>
-                        </span>
-                    </Col>
-                </Row>
+                <Menu/>
 
                 <Row>
                     <Form onSubmit={this.handleLogin} autoComplete="off">
