@@ -1,3 +1,21 @@
+### What is this repository for? ###
+
+* Project Name: api-react-node
+* Quick summary: API modelo e-commerce
+* Version: 1.0.0
+
+### How do I get set up? ###
+
+* Summary of set up: Node v14.17.0.
+* Dependencies: body-parser, express, mysql, react-bootstrap, cors, font-awesome, react-router-dom, sweetalert2
+* Database configuration: MySQL rodando em servidor apache utilizando a ferramenta Xampp
+* How to run the project server: No terminal rode o comando node server.js
+* More information: Na pasta util, encontra-se o db utilizado para implementação da api.
+
+### Who do I talk to? ###
+
+* Repo owner or admin: Tiago Oliveira
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
